@@ -36,3 +36,5 @@ yarn-error.log*
 .devbox/
 devbox.lock
 .direnv/
+
+passwords.txt

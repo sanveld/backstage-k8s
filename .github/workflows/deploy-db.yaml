@@ -66,8 +66,12 @@ jobs:
 
             - name: Terraform Plan
               working-directory: ./terraform
-              run: terraform plan -input=false -out=tfplan
-
+              run: |
+                terraform plan \
+                  -var="db_username=${{ secrets.DB_USERNAME }}" \
+                  -var="db_password=${{ secrets.DB_PASSWORD }}" \
+                  -out=tfplan
+              
             - name: Terraform Apply
               working-directory: ./terraform
               run: terraform apply -auto-approve tfplan

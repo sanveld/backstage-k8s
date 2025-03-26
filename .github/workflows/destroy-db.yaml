@@ -25,7 +25,11 @@ jobs:
               run: terraform init
                 
             - name: Terraform Plan Destroy
-              run: terraform plan -destroy -out=tfplan
+              run: |
+                terraform plan -destroy \
+                    -var="db_username=${{ secrets.DB_USERNAME }}" \
+                    -var="db_password=${{ secrets.DB_PASSWORD }}" \
+                    -out=tfplan
               env:
                   TF_VAR_environment: ${{ github.event.inputs.environment }}
                     

@@ -3,18 +3,6 @@ kind: Namespace
 metadata:
   name: backstage
 ---
-apiVersion: v1
-kind: Secret
-metadata:
-  name: postgres-secrets
-  namespace: backstage
-type: Opaque
-data:
-  POSTGRES_USER: 
-  POSTGRES_PASSWORD: 
-  POSTGRES_HOST: 
-  POSTGRES_PORT: 
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -53,3 +41,30 @@ spec:
     - name: http
       port: 80
       targetPort: http
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: backstage-ingress
+  namespace: backstage
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    traefik.ingress.kubernetes.io/router.entrypoints: "web,websecure"
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  rules:
+    - host: backstage.example.com  # Replace with your actual domain
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: backstage
+                port:
+                  name: http
+  # Optional: Add TLS configuration if you have certificates
+  # tls:
+  # - hosts:
+  #   - backstage.example.com
+  #   secretName: backstage-tls-cert

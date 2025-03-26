@@ -20,11 +20,14 @@ jobs:
         with:
           node-version: '20'
           cache: 'yarn'
+          cache-dependency-path: backstage/yarn.lock  # Point to the correct yarn.lock location
 
       - name: Install dependencies
+        working-directory: ./backstage  # Change working directory to backstage folder
         run: yarn install --immutable
 
       - name: Build backend
+        working-directory: ./backstage  # Change working directory to backstage folder
         run: |
           yarn tsc
           yarn build:backend
@@ -39,7 +42,7 @@ jobs:
       - name: Build and push image
         uses: docker/build-push-action@v4
         with:
-          context: .
+          context: ./backstage  # Point to the backstage directory as build context
           push: true
-          file: packages/backend/Dockerfile
+          file: ./backstage/packages/backend/Dockerfile
           tags: ghcr.io/${{ github.repository }}-backend:${{ github.sha }},ghcr.io/${{ github.repository }}-backend:latest

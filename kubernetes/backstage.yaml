@@ -10,10 +10,10 @@ metadata:
   namespace: backstage
 type: Opaque
 data:
-  POSTGRES_USER: cG9zdGdyZXNhZG1pbg==
-  POSTGRES_PASSWORD: YWdpOEFoeGF0NWFvcGFSaQ==
-  POSTGRES_HOST: YmFja3N0YWdlLXBvc3RncmVzLWRldnBsYXRmb3JtMC5wb3N0Z3Jlcy5kYXRhYmFzZS5henVyZS5jb20=
-  POSTGRES_PORT: NTQzMg==
+  POSTGRES_USER: 
+  POSTGRES_PASSWORD: 
+  POSTGRES_HOST: 
+  POSTGRES_PORT: 
 ---
 apiVersion: apps/v1
 kind: Deployment

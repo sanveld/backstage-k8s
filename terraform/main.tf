@@ -1,3 +1,13 @@
+# Configure Terraform backend to store state in Azure Storage
+terraform {
+  backend "azurerm" {
+    resource_group_name  = "devplatform-tf-state-rg"
+    storage_account_name = "tfstate13850"
+    container_name       = "tfstate"
+    key                  = "backstage.terraform.tfstate"
+  }
+}
+
 # Configure the Azure provider
 provider "azurerm" {
   features {}

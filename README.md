@@ -95,6 +95,25 @@ kubectl apply -f kubernetes/dev/
 kubectl port-forward -n backstage svc/backstage-frontend 3000:80
 ```
 
+## Todo List
+
+- [ ] Research the difference between app-config and app-config.production
+  - Understand how environment-specific configurations are managed
+  - Determine best practices for production deployments
+
+- [ ] Check custom domain configuration
+  - Verify DNS settings
+  - Ensure TLS/SSL is properly configured
+  - Test accessibility through the custom domain
+
+- [ ] PostgreSQL Secret Management
+  - Currently manually deploying secrets to the cluster
+  - Investigate if current approach works reliably
+  - Research using Azure Key Vault integration for secret management
+    - Look into Azure Key Vault CSI driver
+    - Evaluate SecretProviderClass configuration
+    - Compare security and operational benefits over manual secret management
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
